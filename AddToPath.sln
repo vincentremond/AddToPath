@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AddToPath", "AddToPath\AddToPath.fsproj", "{7DF2D6AA-7A6E-4C75-B478-98B40A2A6AD3}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AddToPath.Tests", "AddToPath.Tests\AddToPath.Tests.fsproj", "{072D854A-06D6-4620-96A6-6EE0A742336E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{03FF99BE-6895-4E3A-89C7-6256015FEF1B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pinicola.FSharp", "Pinicola.FSharp", "{7335584E-B7B1-454D-B500-2AD30E6C70E9}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Pinicola.FSharp", "Pinicola.FSharp\Pinicola.FSharp\Pinicola.FSharp.fsproj", "{B4E51367-9175-4140-A3DC-27526641DC86}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Pinicola.FSharp.SpectreConsole", "Pinicola.FSharp\Pinicola.FSharp.SpectreConsole\Pinicola.FSharp.SpectreConsole.fsproj", "{070C1B50-5489-4806-81F1-E35D42824E39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DF2D6AA-7A6E-4C75-B478-98B40A2A6AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF2D6AA-7A6E-4C75-B478-98B40A2A6AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF2D6AA-7A6E-4C75-B478-98B40A2A6AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF2D6AA-7A6E-4C75-B478-98B40A2A6AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072D854A-06D6-4620-96A6-6EE0A742336E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072D854A-06D6-4620-96A6-6EE0A742336E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072D854A-06D6-4620-96A6-6EE0A742336E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072D854A-06D6-4620-96A6-6EE0A742336E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E51367-9175-4140-A3DC-27526641DC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E51367-9175-4140-A3DC-27526641DC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E51367-9175-4140-A3DC-27526641DC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E51367-9175-4140-A3DC-27526641DC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070C1B50-5489-4806-81F1-E35D42824E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070C1B50-5489-4806-81F1-E35D42824E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070C1B50-5489-4806-81F1-E35D42824E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070C1B50-5489-4806-81F1-E35D42824E39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4E51367-9175-4140-A3DC-27526641DC86} = {7335584E-B7B1-454D-B500-2AD30E6C70E9}
+		{070C1B50-5489-4806-81F1-E35D42824E39} = {7335584E-B7B1-454D-B500-2AD30E6C70E9}
+	EndGlobalSection
+EndGlobal
