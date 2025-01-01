@@ -7,17 +7,18 @@ open Fargo.Operators
 module Cli =
 
     [<RequireQualifiedAccess>]
-    type private Command' =
+    type Command' =
         | Add
         | List
         | Check
 
     type Command =
-        | Add of string
+        | Add of Path: string * List: bool
         | List
-        | Check
+        | Check of List: bool
 
     let parser =
+
         fargo {
             match!
                 (cmd "add" null "Add a new path to the PATH user environment variable"
@@ -29,9 +30,11 @@ module Cli =
                 <|> (ret Command'.Add)
             with
             | Command'.List -> return Command.List
-            | Command'.Check -> return Command.Check
-            | Command'.Add
-            | _ ->
+            | Command'.Check ->
+                let! list = flag "list" "l" "List the current PATH user environment variable"
+                return Command.Check list
+            | Command'.Add ->
                 let! path = arg "path" "The path to add to the PATH user environment variable" |> reqArg
-                return Command.Add path
+                and! list = flag "list" "l" "List the current PATH user environment variable"
+                return Command.Add(path, list)
         }

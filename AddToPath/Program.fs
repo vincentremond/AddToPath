@@ -16,7 +16,19 @@ let readValues () =
     let values = userEnvVarRawValue |> String.split ';' |> List.map String.trim
     values
 
-let add pathToAdd =
+let displayList values =
+    () |> Rule.initBlank |> AnsiConsole.write
+
+    for v in values do
+        AnsiConsole.markupLineInterpolated $" • {v}"
+
+    () |> Rule.initBlank |> AnsiConsole.write
+
+let displayCurrentValues () =
+    let values = readValues ()
+    displayList values
+
+let addOrCheck pathToAdd =
 
     let initialValues = readValues ()
 
@@ -53,38 +65,40 @@ let add pathToAdd =
 
     if fixedValues = initialValues then
         AnsiConsole.markupLineInterpolated $"No changes needed in current [green]{initialValues.Length}[/] entries"
-        Environment.Exit 0
+    else
+        let diff = Diff.build initialValues fixedValues
 
-    let diff = Diff.build initialValues fixedValues
+        for d in diff do
+            match d with
+            | Diff.Deleted v -> AnsiConsole.markupLineInterpolated $"[red]{v}[/]"
+            | Diff.Inserted v -> AnsiConsole.markupLineInterpolated $"[green]{v}[/]"
+            | Diff.Modified v -> AnsiConsole.markupLineInterpolated $"[yellow]{v}[/]"
 
-    for d in diff do
-        match d with
-        | Diff.Deleted v -> AnsiConsole.markupLineInterpolated $"[red]{v}[/]"
-        | Diff.Inserted v -> AnsiConsole.markupLineInterpolated $"[green]{v}[/]"
-        | Diff.Modified v -> AnsiConsole.markupLineInterpolated $"[yellow]{v}[/]"
+        let newValueAsString = fixedValues |> String.concat ";"
 
-    let newValueAsString = fixedValues |> String.concat ";"
+        Environment.SetEnvironmentVariable(envVarName, newValueAsString, EnvironmentVariableTarget.User)
 
-    Environment.SetEnvironmentVariable(envVarName, newValueAsString, EnvironmentVariableTarget.User)
-
-    AnsiConsole.markupLineInterpolated $"[green]Done![/] New value has {fixedValues.Length} entries. [yellow]Restart your shell to apply changes[/]"
+        AnsiConsole.markupLineInterpolated $"[green]Done![/] New value has {fixedValues.Length} entries. [yellow]Restart your shell to apply changes[/]"
 
 let list () =
     let values = readValues ()
     AnsiConsole.markupLineInterpolated $"Current value has [green]{values.Length}[/] entries"
-    () |> Rule.initBlank |> AnsiConsole.write
-
-    for v in values do
-        AnsiConsole.markupLineInterpolated $" • {v}"
-
-    () |> Rule.initBlank |> AnsiConsole.write
+    displayList values
 
 FargoCmdLine.run
     "AddToPath"
     Cli.parser
     (fun args ->
         match args with
-        | Cli.Command.Check -> add None
+        | Cli.Command.Check list ->
+            addOrCheck None
+
+            if list then
+                displayCurrentValues ()
         | Cli.Command.List -> list ()
-        | Cli.Command.Add path -> add (Some path)
+        | Cli.Command.Add(path, list) ->
+            addOrCheck (Some path)
+
+            if list then
+                displayCurrentValues ()
     )
