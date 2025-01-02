@@ -64,7 +64,8 @@ let addOrCheck pathToAdd =
         )
 
     if fixedValues = initialValues then
-        AnsiConsole.markupLineInterpolated $"No changes needed in current [green]{initialValues.Length}[/] entries"
+        AnsiConsole.markupLineInterpolated
+            $"[bold italic yellow]AddToPath[/] No changes needed in current [green]{initialValues.Length}[/] entries"
     else
         let diff = Diff.build initialValues fixedValues
 
@@ -78,11 +79,15 @@ let addOrCheck pathToAdd =
 
         Environment.SetEnvironmentVariable(envVarName, newValueAsString, EnvironmentVariableTarget.User)
 
-        AnsiConsole.markupLineInterpolated $"[green]Done![/] New value has {fixedValues.Length} entries. [yellow]Restart your shell to apply changes[/]"
+        AnsiConsole.markupLineInterpolated
+            $"[bold italic yellow]AddToPath[/] [green]Done![/] New value has {fixedValues.Length} entries. [yellow]Restart your shell to apply changes[/]"
 
 let list () =
     let values = readValues ()
-    AnsiConsole.markupLineInterpolated $"Current value has [green]{values.Length}[/] entries"
+
+    AnsiConsole.markupLineInterpolated
+        $"[bold italic yellow]AddToPath[/] Current value has [green]{values.Length}[/] entries"
+
     displayList values
 
 FargoCmdLine.run
