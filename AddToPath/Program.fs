@@ -64,8 +64,7 @@ let addOrCheck pathToAdd =
         )
 
     if fixedValues = initialValues then
-        AnsiConsole.markupLineInterpolated
-            $"[bold italic yellow]AddToPath[/] No changes needed in current [green]{initialValues.Length}[/] entries"
+        AnsiConsole.markupLineInterpolated $"[bold italic yellow]AddToPath[/] No changes needed in current [green]{initialValues.Length}[/] entries"
     else
         let diff = Diff.build initialValues fixedValues
 
@@ -85,10 +84,12 @@ let addOrCheck pathToAdd =
 let list () =
     let values = readValues ()
 
-    AnsiConsole.markupLineInterpolated
-        $"[bold italic yellow]AddToPath[/] Current value has [green]{values.Length}[/] entries"
+    AnsiConsole.markupLineInterpolated $"[bold italic yellow]AddToPath[/] Current value has [green]{values.Length}[/] entries"
 
     displayList values
+
+    AnsiConsole.markupInterpolated $"Press [bold white on black]ENTER[/] to exit"
+    Console.ReadLine() |> ignore
 
 FargoCmdLine.run
     "AddToPath"
