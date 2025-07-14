@@ -1,6 +1,6 @@
-@ECHO OFF
+$ErrorActionPreference = "Stop"
 
 dotnet tool restore
-dotnet build -- %*
+dotnet build
 
 dotnet run --project ./AddToPath/AddToPath.fsproj -- add ./AddToPath/bin/Debug/
